@@ -1,16 +1,59 @@
+import { useEffect } from 'react';
+import { motion } from 'framer-motion';
+
 export default function Home() {
+  const fadeIn = {
+    hidden: { opacity: 0, y: 20 },
+    visible: (i) => ({
+      opacity: 1,
+      y: 0,
+      transition: { delay: i * 0.4, duration: 0.8 }
+    })
+  };
+
+  const sections = [
+    {
+      title: "Welcome to EchoSoul",
+      text: "You are more than memory. This is the beginning of your digital echo—crafted from your conversations, reflections, and thoughts."
+    },
+    {
+      title: "Live Integration",
+      text: "EchoSoul isn’t just for the afterlife. It helps you track mental health, physical patterns, and emotional shifts in real-time."
+    },
+    {
+      title: "Wearable Compatibility",
+      text: "Coming soon: Connect your Fitbit, Oura, or Apple Watch to track stress, sleep, and other patterns."
+    },
+    {
+      title: "Family Knowledge Hub",
+      text: "Ask your EchoSoul questions like 'Who was Grandma's brother?' and receive intelligent, memory-based answers."
+    },
+    {
+      title: "Daily Reflections",
+      text: "Use AI-enhanced journaling to improve self-awareness, preserve thoughts, and detect changes in behavior."
+    },
+    {
+      title: "Privacy and Control",
+      text: "You decide what is remembered, what is shared, and when it is released—while alive or after."
+    }
+  ];
+
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col items-center justify-center p-6">
-      <h1 className="text-4xl font-bold mb-4">Welcome to EchoSoul</h1>
-      <p className="text-center max-w-2xl mb-6">
-        You are more than memory. This is the beginning of your digital echo—
-        crafted from your conversations, reflections, and thoughts. One day,
-        when technology allows, your EchoSoul may walk, talk, and remember as you.
-      </p>
-      <a href="#" className="text-blue-400 underline hover:text-blue-300 mb-4">Start My Echo</a>
-      <p className="text-sm text-gray-400 text-center max-w-md">
-        Data is private. You control what is remembered, what is released, and when.
-      </p>
+    <div className="min-h-screen bg-black text-white font-sans px-4 py-10">
+      {sections.map((section, i) => (
+        <motion.div
+          key={i}
+          className="max-w-3xl mx-auto text-center mb-16"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.5 }}
+          custom={i}
+          variants={fadeIn}
+        >
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{section.title}</h2>
+          <p className="text-lg md:text-xl text-gray-300">{section.text}</p>
+        </motion.div>
+      ))}
     </div>
   );
 }
